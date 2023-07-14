@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using ProductsAPI.Application.Models.Commands;
+using ProductsAPI.Application.Models.Queries;
 
 namespace ProductsAPI.Web.Controllers;
 
@@ -7,25 +9,36 @@ namespace ProductsAPI.Web.Controllers;
 public class ProductsController : ControllerBase
 {
     [HttpPost]
-    public IActionResult Create()
+    [ProducesResponseType(typeof(ProductsQuery), 201)]
+    public IActionResult Create([FromBody] ProductsCreateCommand command)
     {
         return Ok();
     }
     
     [HttpPut]
-    public IActionResult Update()
+    [ProducesResponseType(typeof(ProductsQuery), 200)]
+    public IActionResult Update([FromBody] ProductsUpdateCommand command)
     {
         return Ok();
     }
     
-    [HttpDelete]
-    public IActionResult Remove()
+    [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(ProductsQuery), 200)]
+    public IActionResult Remove([FromRoute] Guid? id)
     {
         return Ok();
     }
      
     [HttpGet]
+    [ProducesResponseType(typeof(List<ProductsQuery>), 200)]
     public IActionResult Find()
+    {
+        return Ok();
+    }
+    
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ProductsQuery), 200)]
+    public IActionResult FindById([FromRoute] Guid? id)
     {
         return Ok();
     }

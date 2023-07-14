@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using MediatR;
+using ProductsAPI.Application.Models.Queries;
 
 namespace ProductsAPI.Application.Models.Commands;
 
-public class ProductsCreateCommand
+public class ProductsCreateCommand : IRequest<ProductsQuery>
 {
     [Required(ErrorMessage = "Provide product's name")]
     [MinLength(8, ErrorMessage = "Provide at leats {1} characters")]

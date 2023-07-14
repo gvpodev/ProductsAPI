@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using MediatR;
+using ProductsAPI.Application.Models.Queries;
 
 namespace ProductsAPI.Application.Models.Commands;
 
-public class ProductsUpdateCommand
+public class ProductsUpdateCommand : IRequest<ProductsQuery>
 {
     [Required(ErrorMessage = "Provide the product's id")]
     public Guid? Id { get; set; }

@@ -23,7 +23,7 @@ public class ProductsController : ControllerBase
     {
         return Ok();
     }
-    
+     
     [HttpGet]
     public IActionResult Find()
     {

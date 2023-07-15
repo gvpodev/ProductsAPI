@@ -1,3 +1,4 @@
+using MediatR;
 using ProductsAPI.Application.Contracts;
 using ProductsAPI.Application.Models.Commands;
 using ProductsAPI.Application.Models.Queries;
@@ -6,18 +7,25 @@ namespace ProductsAPI.Application.Services;
 
 public class ProductAppService : IProductAppService
 {
-    public Task<ProductsQuery> Create(ProductsCreateCommand command)
+    private readonly IMediator? _mediator;
+
+    public ProductAppService(IMediator? mediator)
     {
-        throw new NotImplementedException();
+        _mediator = mediator;
     }
 
-    public Task<ProductsQuery> Update(ProductsUpdateCommand command)
+    public async Task<ProductsQuery> Create(ProductsCreateCommand command)
     {
-        throw new NotImplementedException();
+        return await _mediator?.Send(command);
     }
 
-    public Task<ProductsQuery> Delete(ProductsDeleteCommand command)
+    public async Task<ProductsQuery> Update(ProductsUpdateCommand command)
     {
-        throw new NotImplementedException();
+        return await _mediator?.Send(command);
+    }
+
+    public async Task<ProductsQuery> Delete(ProductsDeleteCommand command)
+    {
+        return await _mediator?.Send(command);
     }
 }

@@ -1,3 +1,7 @@
+using MediatR;
+using ProductsAPI.Application.Contracts;
+using ProductsAPI.Application.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +9,11 @@ builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+#region DI
+builder.Services.AddTransient<IProductAppService, ProductAppService>();
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+#endregion
 
 var app = builder.Build();
 

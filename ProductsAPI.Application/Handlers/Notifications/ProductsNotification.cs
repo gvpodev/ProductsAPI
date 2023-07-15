@@ -1,8 +1,9 @@
+using MediatR;
 using ProductsAPI.Application.Models.Queries;
 
 namespace ProductsAPI.Application.Handlers.Notifications;
 
-public class ProductNotification
+public class ProductsNotification : INotification
 {
     public ActionNotification? Action { get; set; }
     public ProductsQuery? ProductsQuery { get; set; }

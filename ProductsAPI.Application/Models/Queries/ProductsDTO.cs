@@ -1,6 +1,6 @@
 namespace ProductsAPI.Application.Models.Queries;
 
-public class ProductsQuery
+public class ProductsDTO
 {
     public Guid? Id { get; set; }
     public string? Name { get; set; }

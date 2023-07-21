@@ -5,7 +5,7 @@ namespace ProductsAPI.Application.Contracts.Services;
 
 public interface IProductAppService
 {
-    Task<ProductsQuery> Create(ProductsCreateCommand command);
-    Task<ProductsQuery> Update(ProductsUpdateCommand command);
-    Task<ProductsQuery> Delete(ProductsDeleteCommand command);
+    Task<ProductsDTO> Create(ProductsCreateCommand command);
+    Task<ProductsDTO> Update(ProductsUpdateCommand command);
+    Task<ProductsDTO> Delete(ProductsDeleteCommand command);
 }

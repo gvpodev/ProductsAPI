@@ -18,7 +18,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ProductsQuery), 201)]
+    [ProducesResponseType(typeof(ProductsDTO), 201)]
     public async Task<IActionResult> Create([FromBody] ProductsCreateCommand command)
     {
         var response = await _productAppService?.Create(command);
@@ -27,7 +27,7 @@ public class ProductsController : ControllerBase
     }
     
     [HttpPut]
-    [ProducesResponseType(typeof(ProductsQuery), 200)]
+    [ProducesResponseType(typeof(ProductsDTO), 200)]
     public async Task<IActionResult> Update([FromBody] ProductsUpdateCommand command)
     {
         var response = await _productAppService?.Update(command);
@@ -36,7 +36,7 @@ public class ProductsController : ControllerBase
     }
     
     [HttpDelete("{id}")]
-    [ProducesResponseType(typeof(ProductsQuery), 200)]
+    [ProducesResponseType(typeof(ProductsDTO), 200)]
     public async Task<IActionResult> Remove([FromRoute] Guid? id)
     {
         var command = new ProductsDeleteCommand { Id = id };
@@ -46,14 +46,14 @@ public class ProductsController : ControllerBase
     }
      
     [HttpGet]
-    [ProducesResponseType(typeof(List<ProductsQuery>), 200)]
+    [ProducesResponseType(typeof(List<ProductsDTO>), 200)]
     public IActionResult Find()
     {
         return Ok();
     }
     
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(ProductsQuery), 200)]
+    [ProducesResponseType(typeof(ProductsDTO), 200)]
     public IActionResult FindById([FromRoute] Guid? id)
     {
         return Ok();

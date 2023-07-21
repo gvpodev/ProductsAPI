@@ -4,7 +4,7 @@ using ProductsAPI.Application.Models.Queries;
 
 namespace ProductsAPI.Application.Models.Commands;
 
-public class ProductsUpdateCommand : IRequest<ProductsQuery>
+public class ProductsUpdateCommand : IRequest<ProductsDTO>
 {
     [Required(ErrorMessage = "Provide the product's id")]
     public Guid? Id { get; set; }

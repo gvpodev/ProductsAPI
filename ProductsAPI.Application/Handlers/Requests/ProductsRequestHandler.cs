@@ -7,9 +7,9 @@ using ProductsAPI.Application.Models.Queries;
 namespace ProductsAPI.Application.Handlers.Requests;
 
 public class ProductsRequestHandler : 
-    IRequestHandler<ProductsCreateCommand, ProductsQuery>,
-    IRequestHandler<ProductsUpdateCommand, ProductsQuery>,
-    IRequestHandler<ProductsDeleteCommand, ProductsQuery>
+    IRequestHandler<ProductsCreateCommand, ProductsDTO>,
+    IRequestHandler<ProductsUpdateCommand, ProductsDTO>,
+    IRequestHandler<ProductsDeleteCommand, ProductsDTO>
 {
     private readonly IMediator? _mediator;
 
@@ -18,11 +18,11 @@ public class ProductsRequestHandler :
         _mediator = mediator;
     }
 
-    public async Task<ProductsQuery> Handle(ProductsCreateCommand request, CancellationToken cancellationToken)
+    public async Task<ProductsDTO> Handle(ProductsCreateCommand request, CancellationToken cancellationToken)
     {
         Debug.WriteLine("Cadastrando produto no domínio");
 
-        var query = new ProductsQuery
+        var query = new ProductsDTO
         {
             Id = new Guid(),
             Name = request.Name,
@@ -41,11 +41,11 @@ public class ProductsRequestHandler :
         return query;
     }
 
-    public async Task<ProductsQuery> Handle(ProductsUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<ProductsDTO> Handle(ProductsUpdateCommand request, CancellationToken cancellationToken)
     {
         Debug.WriteLine("Atualizando produto no domínio");
 
-        var query = new ProductsQuery
+        var query = new ProductsDTO
         {
             Id = new Guid(),
             Name = request.Name,
@@ -64,11 +64,11 @@ public class ProductsRequestHandler :
         return query;
     }
 
-    public async Task<ProductsQuery> Handle(ProductsDeleteCommand request, CancellationToken cancellationToken)
+    public async Task<ProductsDTO> Handle(ProductsDeleteCommand request, CancellationToken cancellationToken)
     {
         Debug.WriteLine("Deletando produto no domínio");
 
-        var query = new ProductsQuery
+        var query = new ProductsDTO
         {
             Id = request.Id
         };

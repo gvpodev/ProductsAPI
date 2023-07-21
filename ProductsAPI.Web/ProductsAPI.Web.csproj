@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ProductsAPI.Application\ProductsAPI.Application.csproj" />
+      <ProjectReference Include="..\ProductsAPI.Infra.IoC\ProductsAPI.Infra.IoC.csproj" />
     </ItemGroup>
 
 </Project>

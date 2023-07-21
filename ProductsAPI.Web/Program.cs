@@ -1,5 +1,4 @@
 using MediatR;
-using ProductsAPI.Application.Contracts;
 using ProductsAPI.Application.Contracts.Services;
 using ProductsAPI.Application.Services;
 using ProductsAPI.Infra.IoC.Extensions;

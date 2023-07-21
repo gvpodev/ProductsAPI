@@ -15,18 +15,9 @@ public class ProductAppService : IProductAppService
         _mediator = mediator;
     }
 
-    public async Task<ProductsDTO> Create(ProductsCreateCommand command)
-    {
-        return await _mediator?.Send(command);
-    }
+    public async Task<ProductsDTO> Create(ProductsCreateCommand command) => await _mediator?.Send(command);
 
-    public async Task<ProductsDTO> Update(ProductsUpdateCommand command)
-    {
-        return await _mediator?.Send(command);
-    }
+    public async Task<ProductsDTO> Update(ProductsUpdateCommand command) => await _mediator?.Send(command);
 
-    public async Task<ProductsDTO> Delete(ProductsDeleteCommand command)
-    {
-        return await _mediator?.Send(command);
-    }
+    public async Task<ProductsDTO> Delete(ProductsDeleteCommand command) => await _mediator?.Send(command);
 }

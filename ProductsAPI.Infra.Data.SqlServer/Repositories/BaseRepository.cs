@@ -13,20 +13,11 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
         _context = context;
     }
 
-    public virtual void Add(TEntity entity)
-    {
-        _context?.Set<TEntity>().Add(entity);
-    }
+    public virtual void Add(TEntity entity) => _context?.Set<TEntity>().Add(entity);
 
-    public virtual void Update(TEntity entity)
-    {
-        _context?.Set<TEntity>().Update(entity);
-    }
+    public virtual void Update(TEntity entity) => _context?.Set<TEntity>().Update(entity);
 
-    public virtual void Delete(TEntity entity)
-    {
-        _context?.Set<TEntity>().Remove(entity);
-    }
+    public virtual void Delete(TEntity entity) => _context?.Set<TEntity>().Remove(entity);
 
     public virtual List<TEntity> FindAll() => _context?.Set<TEntity>().ToList();
 

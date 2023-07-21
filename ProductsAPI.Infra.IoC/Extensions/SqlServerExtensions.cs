@@ -7,7 +7,7 @@ namespace ProductsAPI.Infra.IoC.Extensions;
 
 public static class SqlServerExtensions
 {
-    public static IServiceCollection AddSqlServer(
+    public static IServiceCollection AddSqlServerConfig(
         this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("ProductsAPI");

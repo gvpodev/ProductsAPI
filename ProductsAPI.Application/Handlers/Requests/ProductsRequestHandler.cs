@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using MediatR;
+using ProductsAPI.Application.Handlers.Notifications;
 using ProductsAPI.Application.Models.Commands;
 using ProductsAPI.Application.Models.Queries;
 
@@ -9,18 +11,74 @@ public class ProductsRequestHandler :
     IRequestHandler<ProductsUpdateCommand, ProductsQuery>,
     IRequestHandler<ProductsDeleteCommand, ProductsQuery>
 {
-    public Task<ProductsQuery> Handle(ProductsCreateCommand request, CancellationToken cancellationToken)
+    private readonly IMediator? _mediator;
+
+    public ProductsRequestHandler(IMediator? mediator)
     {
-        throw new NotImplementedException();
+        _mediator = mediator;
     }
 
-    public Task<ProductsQuery> Handle(ProductsUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<ProductsQuery> Handle(ProductsCreateCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        Debug.WriteLine("Cadastrando produto no domínio");
+
+        var query = new ProductsQuery
+        {
+            Id = new Guid(),
+            Name = request.Name,
+            Price = request.Price,
+            Quantity = request.Quantity,
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now
+        };
+        
+        await _mediator?.Publish(new ProductsNotification
+        {
+            Action = ActionNotification.Created,
+            ProductsQuery = query
+        })!;
+
+        return query;
     }
 
-    public Task<ProductsQuery> Handle(ProductsDeleteCommand request, CancellationToken cancellationToken)
+    public async Task<ProductsQuery> Handle(ProductsUpdateCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        Debug.WriteLine("Atualizando produto no domínio");
+
+        var query = new ProductsQuery
+        {
+            Id = new Guid(),
+            Name = request.Name,
+            Price = request.Price,
+            Quantity = request.Quantity,
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now
+        };
+        
+        await _mediator?.Publish(new ProductsNotification
+        {
+            Action = ActionNotification.Updated,
+            ProductsQuery = query
+        })!;
+
+        return query;
+    }
+
+    public async Task<ProductsQuery> Handle(ProductsDeleteCommand request, CancellationToken cancellationToken)
+    {
+        Debug.WriteLine("Deletando produto no domínio");
+
+        var query = new ProductsQuery
+        {
+            Id = request.Id
+        };
+        
+        await _mediator?.Publish(new ProductsNotification
+        {
+            Action = ActionNotification.Deleted,
+            ProductsQuery = query
+        })!;
+
+        return query;
     }
 }

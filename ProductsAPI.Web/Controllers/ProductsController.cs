@@ -39,9 +39,9 @@ public class ProductsController : ControllerBase
     public async Task<IActionResult> Remove([FromRoute] Guid? id)
     {
         var command = new ProductsDeleteCommand { Id = id };
-        await _productAppService?.Delete(command);
-        
-        return StatusCode(200, Response);
+        var response = await _productAppService?.Delete(command);
+
+        return StatusCode(200, response);
     }
      
     [HttpGet]

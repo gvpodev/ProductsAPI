@@ -8,4 +8,7 @@ public interface IProductAppService
     Task<ProductsDTO> Create(ProductsCreateCommand command);
     Task<ProductsDTO> Update(ProductsUpdateCommand command);
     Task<ProductsDTO> Delete(ProductsDeleteCommand command);
+
+    List<ProductsDTO> FindAll();
+    ProductsDTO FindById(Guid id);
 }

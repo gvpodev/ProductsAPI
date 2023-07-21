@@ -11,11 +11,9 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServerConfig(builder.Configuration);
-
-#region DI
-builder.Services.AddTransient<IProductAppService, ProductAppService>();
-builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-#endregion
+builder.Services.AddMongoDbConfig(builder.Configuration);
+builder.Services.AddMediatRConfig();
+builder.Services.AddDependencyInjection();
 
 var app = builder.Build();
 

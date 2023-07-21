@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Stores\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ProductsAPI.Application\ProductsAPI.Application.csproj" />
     </ItemGroup>
 

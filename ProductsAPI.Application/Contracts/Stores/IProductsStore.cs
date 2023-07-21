@@ -2,7 +2,7 @@
 
 namespace ProductsAPI.Application.Contracts.Stores;
 
-public interface IProductStore
+public interface IProductsStore
 {
     void Add(ProductsDTO item);
     void Update(ProductsDTO item);

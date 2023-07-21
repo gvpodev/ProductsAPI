@@ -6,12 +6,12 @@ using ProductsAPI.Infra.Data.MongoDB.Settings;
 
 namespace ProductsAPI.Infra.Data.MongoDB.Contexts;
 
-public class MongDbContext
+public class MongoDbContext
 {
     private readonly MongoDbSettings? _configuration;
     private IMongoDatabase? _mongoDatabase;
 
-    public MongDbContext(IOptions<MongoDbSettings>? configuration)
+    public MongoDbContext(IOptions<MongoDbSettings>? configuration)
     {
         _configuration = configuration?.Value;
 

@@ -1,5 +1,6 @@
 using MediatR;
 using ProductsAPI.Application.Contracts;
+using ProductsAPI.Application.Contracts.Services;
 using ProductsAPI.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);

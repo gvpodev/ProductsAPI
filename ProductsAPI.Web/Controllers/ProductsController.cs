@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductsAPI.Application.Contracts;
+using ProductsAPI.Application.Contracts.Services;
 using ProductsAPI.Application.Models.Commands;
 using ProductsAPI.Application.Models.Queries;
 

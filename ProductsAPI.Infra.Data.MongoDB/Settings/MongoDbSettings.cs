@@ -1,6 +1,6 @@
-﻿namespace ProductsAPI.Infra.Data.MongoDB.Configurations;
+﻿namespace ProductsAPI.Infra.Data.MongoDB.Settings;
 
-public class MongoDbConfiguration
+public class MongoDbSettings
 {
     public string? Host { get; set; }
     public string? Name { get; set; }

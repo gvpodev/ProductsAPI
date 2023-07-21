@@ -2,16 +2,16 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using ProductsAPI.Application.Models.Queries;
-using ProductsAPI.Infra.Data.MongoDB.Configurations;
+using ProductsAPI.Infra.Data.MongoDB.Settings;
 
 namespace ProductsAPI.Infra.Data.MongoDB.Contexts;
 
 public class MongDbContext
 {
-    private readonly MongoDbConfiguration? _configuration;
+    private readonly MongoDbSettings? _configuration;
     private IMongoDatabase? _mongoDatabase;
 
-    public MongDbContext(IOptions<MongoDbConfiguration>? configuration)
+    public MongDbContext(IOptions<MongoDbSettings>? configuration)
     {
         _configuration = configuration?.Value;
 

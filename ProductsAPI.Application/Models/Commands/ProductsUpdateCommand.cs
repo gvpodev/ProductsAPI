@@ -19,4 +19,7 @@ public class ProductsUpdateCommand : IRequest<ProductsDTO>
 
     [Required(ErrorMessage = "Provide the product's quantity")]
     public int? Quantity { get; set; }
+    
+    [Required(ErrorMessage = "Provide the product's creation date")]
+    public DateTime? CreatedAt { get; set; }
 }

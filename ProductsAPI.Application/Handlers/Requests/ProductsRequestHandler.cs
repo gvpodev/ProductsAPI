@@ -3,6 +3,8 @@ using MediatR;
 using ProductsAPI.Application.Handlers.Notifications;
 using ProductsAPI.Application.Models.Commands;
 using ProductsAPI.Application.Models.Queries;
+using ProductsAPI.Domain.Contracts.Services;
+using ProductsAPI.Domain.Entities;
 
 namespace ProductsAPI.Application.Handlers.Requests;
 
@@ -12,73 +14,85 @@ public class ProductsRequestHandler :
     IRequestHandler<ProductsDeleteCommand, ProductsDTO>
 {
     private readonly IMediator? _mediator;
+    private readonly IProductDomainService? _productDomainService;
 
-    public ProductsRequestHandler(IMediator? mediator)
+    public ProductsRequestHandler(IMediator? mediator, IProductDomainService productDomainService)
     {
         _mediator = mediator;
+        _productDomainService = productDomainService;
     }
 
     public async Task<ProductsDTO> Handle(ProductsCreateCommand request, CancellationToken cancellationToken)
     {
-        Debug.WriteLine("Cadastrando produto no domínio");
-
-        var query = new ProductsDTO
+        var product = new Product
         {
-            Id = new Guid(),
+            Id = Guid.NewGuid(),
             Name = request.Name,
             Price = request.Price,
             Quantity = request.Quantity,
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now
+        };
+        
+        _productDomainService?.Add(product);
+
+        var dto = new ProductsDTO
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Quantity = product.Quantity,
+            CreatedAt = product.CreatedAt,
+            UpdatedAt = product.UpdatedAt
         };
         
         await _mediator?.Publish(new ProductsNotification
         {
             Action = ActionNotification.Created,
-            ProductsQuery = query
+            ProductsDto = dto
         })!;
 
-        return query;
+        return dto;
     }
 
     public async Task<ProductsDTO> Handle(ProductsUpdateCommand request, CancellationToken cancellationToken)
     {
-        Debug.WriteLine("Atualizando produto no domínio");
+        var product = _productDomainService?.GetById(request.Id.Value);
 
-        var query = new ProductsDTO
+        var dto = new ProductsDTO
         {
-            Id = new Guid(),
-            Name = request.Name,
-            Price = request.Price,
-            Quantity = request.Quantity,
-            CreatedAt = DateTime.Now,
-            UpdatedAt = DateTime.Now
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Quantity = product.Quantity,
+            CreatedAt = product.CreatedAt,
+            UpdatedAt = product.UpdatedAt
         };
         
         await _mediator?.Publish(new ProductsNotification
         {
             Action = ActionNotification.Updated,
-            ProductsQuery = query
+            ProductsDto = dto
         })!;
 
-        return query;
+        return dto;
     }
 
     public async Task<ProductsDTO> Handle(ProductsDeleteCommand request, CancellationToken cancellationToken)
     {
-        Debug.WriteLine("Deletando produto no domínio");
+        var product = _productDomainService?.GetById(request.Id.Value);
 
-        var query = new ProductsDTO
+        var dto = new ProductsDTO
         {
-            Id = request.Id
+            Id = product.Id
         };
         
         await _mediator?.Publish(new ProductsNotification
         {
             Action = ActionNotification.Deleted,
-            ProductsQuery = query
+            ProductsDto = dto
         })!;
 
-        return query;
+        return dto;
     }
 }

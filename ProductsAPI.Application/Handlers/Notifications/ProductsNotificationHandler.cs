@@ -9,7 +9,7 @@ public class ProductsNotificationHandler : INotificationHandler<ProductsNotifica
     {
         Debug.WriteLine($"Recebendo notificação de: {notification.Action}");
         Debug.WriteLine("Produto gravado, alterado ou excluído no banco de cache");
-        Debug.WriteLine($"{notification.ProductsQuery?.Name}");
+        Debug.WriteLine($"{notification.ProductsDto?.Name}");
         
         return Task.CompletedTask;
     }

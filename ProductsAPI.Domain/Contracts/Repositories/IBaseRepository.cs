@@ -8,4 +8,5 @@ public interface IBaseRepository<TEntity, TKey> : IDisposable
     void Delete(TEntity entity);
     List<TEntity> FindAll();
     TEntity Find(TKey id);
+    void SaveChanges();
 }

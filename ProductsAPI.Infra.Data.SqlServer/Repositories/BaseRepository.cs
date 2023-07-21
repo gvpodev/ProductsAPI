@@ -22,6 +22,7 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
     public virtual List<TEntity> FindAll() => _context?.Set<TEntity>().ToList();
 
     public virtual TEntity Find(TKey id) => _context?.Set<TEntity>().Find(id);
+    public void SaveChanges() => _context?.SaveChanges();
 
     public virtual void Dispose() => _context?.Dispose();
 }

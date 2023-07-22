@@ -62,11 +62,11 @@ public class ProductsRequestHandler :
         var dto = new ProductsDTO
         {
             Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Quantity = product.Quantity,
+            Name = request.Name,
+            Price = request.Price,
+            Quantity = request.Quantity,
             CreatedAt = product.CreatedAt,
-            UpdatedAt = product.UpdatedAt
+            UpdatedAt = DateTime.Now
         };
         
         await _mediator?.Publish(new ProductsNotification

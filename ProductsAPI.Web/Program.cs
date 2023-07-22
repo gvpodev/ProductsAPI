@@ -12,8 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServerConfig(builder.Configuration);
 builder.Services.AddMongoDbConfig(builder.Configuration);
-builder.Services.AddMediatRConfig();
 builder.Services.AddDependencyInjection();
+builder.Services.AddMediatRConfig();
 
 var app = builder.Build();
 

@@ -47,15 +47,9 @@ public class ProductsController : ControllerBase
      
     [HttpGet]
     [ProducesResponseType(typeof(List<ProductsDTO>), 200)]
-    public IActionResult Find()
-    {
-        return Ok();
-    }
-    
+    public IActionResult Find() => StatusCode(200, _productAppService?.FindAll());
+
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ProductsDTO), 200)]
-    public IActionResult FindById([FromRoute] Guid? id)
-    {
-        return Ok();
-    }
+    public IActionResult FindById([FromRoute] Guid id) => StatusCode(200, _productAppService?.FindById(id));
 }

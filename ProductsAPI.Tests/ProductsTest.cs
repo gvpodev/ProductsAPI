@@ -62,10 +62,10 @@ public class ProductsTest
     [Fact]
     public async Task Test_Products_Delete_Returns_Ok()
     {
-        var createdProductDto = await Test_Products_Post_Returns_Created();
+        // var createdProductDto = await Test_Products_Post_Returns_Created();
         var client = TestHelper.CreateClient;
 
-        var result = await client.DeleteAsync($"{_endpoint}/{createdProductDto?.Id}");
+        var result = await client.DeleteAsync($"{_endpoint}/509625d4-e079-493a-bb96-0c326e5b4d6e");
 
         result.StatusCode.Should().Be(HttpStatusCode.OK);
     }

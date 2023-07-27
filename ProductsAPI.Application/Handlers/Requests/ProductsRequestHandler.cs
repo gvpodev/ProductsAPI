@@ -58,15 +58,21 @@ public class ProductsRequestHandler :
     public async Task<ProductsDTO> Handle(ProductsUpdateCommand request, CancellationToken cancellationToken)
     {
         var product = _productDomainService?.GetById(request.Id.Value);
+        product.Name = request.Name;
+        product.Quantity = request.Quantity;
+        product.Price = request.Price;
+        product.UpdatedAt = DateTime.Now;
+        
+        _productDomainService?.Update(product);
 
         var dto = new ProductsDTO
         {
-            Id = product.Id,
+            Id = product?.Id,
             Name = request.Name,
             Price = request.Price,
             Quantity = request.Quantity,
-            CreatedAt = product.CreatedAt,
-            UpdatedAt = DateTime.Now
+            CreatedAt = product?.CreatedAt,
+            UpdatedAt = product?.UpdatedAt
         };
         
         await _mediator?.Publish(new ProductsNotification
@@ -81,10 +87,17 @@ public class ProductsRequestHandler :
     public async Task<ProductsDTO> Handle(ProductsDeleteCommand request, CancellationToken cancellationToken)
     {
         var product = _productDomainService?.GetById(request.Id.Value);
+        
+        _productDomainService?.Delete(product);
 
         var dto = new ProductsDTO
         {
-            Id = product.Id
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Quantity = product.Quantity,
+            CreatedAt = product.CreatedAt,
+            UpdatedAt = product.UpdatedAt
         };
         
         await _mediator?.Publish(new ProductsNotification
